@@ -1,0 +1,63 @@
+.detail-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.identity-block {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 18px;
+  background: #d9eafd;
+  color: #1264a3;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.identity-block h2 {
+  margin: 0 0 6px;
+}
+
+.identity-block p {
+  margin: 0;
+  color: #607083;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0;
+}
+
+.detail-grid div {
+  border: 1px solid #e1e8f0;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+dt {
+  color: #607083;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+dd {
+  margin: 0;
+  color: #102a43;
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .detail-grid { grid-template-columns: 1fr; }
+}

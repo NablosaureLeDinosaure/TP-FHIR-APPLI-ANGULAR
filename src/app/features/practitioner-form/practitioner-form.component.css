@@ -1,0 +1,9 @@
+small {
+  color: #c93636;
+  font-weight: 600;
+}
+
+button[disabled] {
+  opacity: 0.65;
+  cursor: not-allowed;
+}

@@ -1,0 +1,64 @@
+.table-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.table-toolbar input {
+  width: min(460px, 100%);
+  border: 1px solid #bcccdc;
+  border-radius: 10px;
+  padding: 11px 12px;
+}
+
+.table-toolbar span {
+  color: #607083;
+  font-weight: 700;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border-bottom: 1px solid #e6edf5;
+  padding: 14px 12px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+th {
+  color: #334e68;
+  background: #f7fafc;
+}
+
+.actions-cell {
+  white-space: nowrap;
+  text-align: right;
+}
+
+.actions-cell .btn {
+  margin-left: 6px;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.empty-cell {
+  text-align: center;
+  color: #607083;
+  padding: 30px;
+}
+
+@media (max-width: 720px) {
+  .table-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

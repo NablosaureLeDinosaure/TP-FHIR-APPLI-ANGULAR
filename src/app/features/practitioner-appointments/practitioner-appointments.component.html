@@ -1,0 +1,82 @@
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Rendez-vous par RPPS</h1>
+    <p class="page-subtitle">
+      Recherche des rendez-vous d’un soignant à partir de son numéro RPPS.
+    </p>
+  </div>
+</section>
+
+@if (errorMessage()) {
+  <div class="error-message">{{ errorMessage() }}</div>
+}
+
+<div class="card">
+  <div class="status-message">
+    Cette page recherche les rendez-vous FHIR Appointment dont le participant soignant possède le numéro RPPS renseigné.
+  </div>
+
+  <form class="search-zone" (ngSubmit)="searchAppointments()">
+    <label for="rpps">Numéro RPPS du soignant</label>
+
+    <div>
+      <input
+        id="rpps"
+        name="rpps"
+        type="text"
+        placeholder="10000000001"
+        [ngModel]="rpps()"
+        (ngModelChange)="updateRpps($event)"
+      />
+
+      <button class="btn btn-primary" type="submit" [disabled]="isLoading()">
+        Rechercher
+      </button>
+    </div>
+  </form>
+
+  @if (isLoading()) {
+    <p>Recherche en cours...</p>
+  }
+
+  @if (searched() && !isLoading()) {
+    <section class="result-block">
+      <h2>Résultat pour RPPS : {{ rpps() }}</h2>
+      <p class="practitioner-name">{{ practitionerName() }}</p>
+
+      @if (appointments().length > 0) {
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Début</th>
+              <th>Fin</th>
+              <th>Patient</th>
+              <th>Salle</th>
+              <th>Statut</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (appointment of appointments(); track appointment.id) {
+              <tr>
+                <td>{{ appointment.date }}</td>
+                <td>{{ appointment.startTime }}</td>
+                <td>{{ appointment.endTime }}</td>
+                <td>{{ appointment.patientName }}</td>
+                <td>{{ appointment.room }}</td>
+                <td>{{ appointment.status }}</td>
+                <td>{{ appointment.description }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      } @else {
+        <div class="empty-state">
+          Aucun rendez-vous trouvé pour ce numéro RPPS.
+        </div>
+      }
+    </section>
+  }
+</div>

@@ -1,0 +1,67 @@
+.search-zone {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 18px 0 24px;
+}
+
+.search-zone label {
+  font-weight: 800;
+  color: #334e68;
+}
+
+.search-zone div {
+  display: flex;
+  gap: 10px;
+}
+
+.search-zone input {
+  flex: 1;
+  border: 1px solid #bcccdc;
+  border-radius: 10px;
+  padding: 11px 12px;
+}
+
+.result-block {
+  border-top: 1px solid #e6edf5;
+  padding-top: 20px;
+}
+
+.result-block h2 {
+  margin: 0 0 4px;
+  color: #102a43;
+}
+
+.practitioner-name {
+  margin: 0 0 18px;
+  color: #607083;
+  font-weight: 700;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border-bottom: 1px solid #e6edf5;
+  padding: 13px 12px;
+  text-align: left;
+}
+
+th {
+  background: #f7fafc;
+  color: #334e68;
+}
+
+.empty-state {
+  padding: 22px;
+  border-radius: 12px;
+  background: #f7fafc;
+  border: 1px dashed #bcccdc;
+  color: #607083;
+}
+
+@media (max-width: 650px) {
+  .search-zone div { flex-direction: column; }
+}

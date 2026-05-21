@@ -1,0 +1,150 @@
+<section class="page-header">
+  <div>
+    <h1 class="page-title">{{ isEditMode() ? 'Modifier un soignant' : 'Créer un nouveau soignant' }}</h1>
+    <p class="page-subtitle">Formulaire basé sur le profil FHIR RHPractitioner.</p>
+  </div>
+  <a class="btn btn-secondary" routerLink="/">Retour à l’accueil</a>
+</section>
+
+@if (errorMessage()) {
+  <div class="error-message">{{ errorMessage() }}</div>
+}
+
+<div class="card">
+  @if (isLoading() && isEditMode()) {
+    <p>Chargement du soignant...</p>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <h2 class="form-section-title">Informations principales</h2>
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="family">Nom</label>
+          <input id="family" type="text" formControlName="family" />
+          @if (hasError('family')) { <small>Le nom est obligatoire.</small> }
+        </div>
+
+        <div class="form-field">
+          <label for="given">Prénom</label>
+          <input id="given" type="text" formControlName="given" />
+          @if (hasError('given')) { <small>Le prénom est obligatoire.</small> }
+        </div>
+
+        <div class="form-field">
+          <label for="birthDate">Date de naissance</label>
+          <input id="birthDate" type="date" formControlName="birthDate" />
+          @if (hasError('birthDate')) { <small>La date de naissance est obligatoire.</small> }
+        </div>
+
+        <div class="form-field">
+          <label for="gender">Genre</label>
+          <select id="gender" formControlName="gender">
+            <option value="female">Femme</option>
+            <option value="male">Homme</option>
+            <option value="other">Autre</option>
+            <option value="unknown">Inconnu</option>
+          </select>
+        </div>
+      </div>
+
+      <h2 class="form-section-title">Identifiants</h2>
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="idmed">Identifiant médical interne</label>
+          <input id="idmed" type="text" formControlName="idmed" placeholder="MED003" />
+          @if (hasError('idmed')) { <small>L’identifiant interne est obligatoire.</small> }
+        </div>
+
+        <div class="form-field">
+          <label for="rpps">Numéro RPPS</label>
+          <input id="rpps" type="text" formControlName="rpps" placeholder="10000000003" />
+          @if (hasError('rpps')) { <small>Le numéro RPPS est obligatoire.</small> }
+        </div>
+      </div>
+
+      <h2 class="form-section-title">Contact</h2>
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="telecomSystem">Type de contact</label>
+          <select id="telecomSystem" formControlName="telecomSystem">
+            <option value="phone">Téléphone</option>
+            <option value="email">Email</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="telecomValue">Valeur du contact</label>
+          <input id="telecomValue" type="text" formControlName="telecomValue" placeholder="0601020304" />
+          @if (hasError('telecomValue')) { <small>Le contact est obligatoire.</small> }
+        </div>
+      </div>
+
+      <h2 class="form-section-title">Adresse</h2>
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="addressLine">Adresse</label>
+          <input id="addressLine" type="text" formControlName="addressLine" />
+        </div>
+
+        <div class="form-field">
+          <label for="city">Ville</label>
+          <input id="city" type="text" formControlName="city" />
+        </div>
+
+        <div class="form-field">
+          <label for="postalCode">Code postal</label>
+          <input id="postalCode" type="text" formControlName="postalCode" />
+        </div>
+
+        <div class="form-field">
+          <label for="country">Pays</label>
+          <input id="country" type="text" formControlName="country" />
+        </div>
+      </div>
+
+      <h2 class="form-section-title">Qualification</h2>
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="gradeCode">Grade</label>
+          <select id="gradeCode" formControlName="gradeCode">
+            @for (grade of gradeOptions; track grade.code) {
+              <option [value]="grade.code">{{ grade.display }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="qualificationId">Identifiant qualification</label>
+          <input id="qualificationId" type="text" formControlName="qualificationId" placeholder="QUAL003" />
+          @if (hasError('qualificationId')) { <small>L’identifiant de qualification est obligatoire.</small> }
+        </div>
+
+        <div class="form-field">
+          <label for="qualificationStart">Début de qualification</label>
+          <input id="qualificationStart" type="date" formControlName="qualificationStart" />
+          @if (hasError('qualificationStart')) { <small>La date de début est obligatoire.</small> }
+        </div>
+      </div>
+
+      <h2 class="form-section-title">Autres informations</h2>
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="language">Langue</label>
+          <input id="language" type="text" formControlName="language" />
+        </div>
+
+        <div class="form-field">
+          <label for="photoUrl">URL / nom de la photo</label>
+          <input id="photoUrl" type="text" formControlName="photoUrl" placeholder="photo-soignant.jpg" />
+          @if (hasError('photoUrl')) { <small>La photo est obligatoire dans le profil RH.</small> }
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <a class="btn btn-secondary" routerLink="/">Annuler</a>
+        <button class="btn btn-primary" type="submit" [disabled]="isLoading()">
+          {{ isEditMode() ? 'Enregistrer les modifications' : 'Créer le soignant' }}
+        </button>
+      </div>
+    </form>
+  }
+</div>

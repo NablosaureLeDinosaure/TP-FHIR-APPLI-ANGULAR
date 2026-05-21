@@ -1,0 +1,62 @@
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Soignants recrutés</h1>
+    <p class="page-subtitle">Liste des ressources FHIR Practitioner gérées par le groupe RH.</p>
+  </div>
+  <a class="btn btn-primary" routerLink="/practitioners/new">Créer un soignant</a>
+</section>
+
+@if (errorMessage()) {
+  <div class="error-message">{{ errorMessage() }}</div>
+}
+
+<div class="card">
+  <div class="table-toolbar">
+    <input
+      type="search"
+      placeholder="Rechercher par nom, prénom ou RPPS..."
+      [value]="searchTerm()"
+      (input)="updateSearchTerm($any($event.target).value)"
+    />
+    <span>{{ filteredPractitioners().length }} soignant(s)</span>
+  </div>
+
+  @if (isLoading()) {
+    <p>Chargement des soignants...</p>
+  } @else {
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Âge</th>
+            <th>RPPS</th>
+            <th>Grade</th>
+            <th class="actions-cell">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (practitioner of filteredPractitioners(); track practitioner.id) {
+            <tr>
+              <td>{{ nameOf(practitioner).family }}</td>
+              <td>{{ nameOf(practitioner).given }}</td>
+              <td>{{ ageOf(practitioner) }}</td>
+              <td>{{ rppsOf(practitioner) }}</td>
+              <td>{{ gradeOf(practitioner) }}</td>
+              <td class="actions-cell">
+                <a class="btn btn-outline" [routerLink]="['/practitioners', practitioner.id]">Voir</a>
+                <a class="btn btn-secondary" [routerLink]="['/practitioners', practitioner.id, 'edit']">Modifier</a>
+                <button class="btn btn-danger" type="button" (click)="deletePractitioner(practitioner)">Supprimer</button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="empty-cell">Aucun soignant trouvé.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

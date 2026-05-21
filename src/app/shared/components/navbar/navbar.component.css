@@ -1,0 +1,65 @@
+.topbar {
+  background: #102a43;
+  color: white;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  gap: 22px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #2f80ed;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+.brand div {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand span:last-child {
+  color: #bcccdc;
+  font-size: 13px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: #d9e2ec;
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+nav a.active,
+nav a:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+}
+
+@media (max-width: 760px) {
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 18px;
+  }
+}

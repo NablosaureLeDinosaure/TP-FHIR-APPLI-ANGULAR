@@ -1,0 +1,46 @@
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Fiche soignant</h1>
+    <p class="page-subtitle">Détail d’une ressource FHIR Practitioner.</p>
+  </div>
+  <a class="btn btn-secondary" routerLink="/">Retour à l’accueil</a>
+</section>
+
+@if (errorMessage()) {
+  <div class="error-message">{{ errorMessage() }}</div>
+}
+
+@if (isLoading()) {
+  <div class="card">Chargement...</div>
+} @else if (practitioner(); as item) {
+  <div class="card detail-card">
+    <div class="identity-block">
+      <div class="avatar">{{ nameOf(item).given.charAt(0) }}{{ nameOf(item).family.charAt(0) }}</div>
+      <div>
+        <h2>{{ nameOf(item).given }} {{ nameOf(item).family }}</h2>
+        <p>{{ gradeOf(item) }}</p>
+      </div>
+    </div>
+
+    <dl class="detail-grid">
+      <div><dt>Nom</dt><dd>{{ nameOf(item).family }}</dd></div>
+      <div><dt>Prénom</dt><dd>{{ nameOf(item).given }}</dd></div>
+      <div><dt>Âge</dt><dd>{{ ageOf(item) }}</dd></div>
+      <div><dt>Genre</dt><dd>{{ item.gender || '-' }}</dd></div>
+      <div><dt>RPPS</dt><dd>{{ rppsOf(item) }}</dd></div>
+      <div><dt>ID médical interne</dt><dd>{{ idmedOf(item) }}</dd></div>
+      <div><dt>Contact</dt><dd>{{ contactOf(item) }}</dd></div>
+      <div><dt>Langue</dt><dd>{{ item.communication?.[0]?.language?.text || '-' }}</dd></div>
+      <div><dt>Adresse</dt><dd>{{ addressOf(item) }}</dd></div>
+      <div><dt>Photo</dt><dd>{{ item.photo?.[0]?.url || '-' }}</dd></div>
+      <div><dt>Qualification</dt><dd>{{ item.qualification?.[0]?.identifier?.[0]?.value || '-' }}</dd></div>
+      <div><dt>Début qualification</dt><dd>{{ item.qualification?.[0]?.period?.start || '-' }}</dd></div>
+    </dl>
+
+    <div class="form-actions">
+      <a class="btn btn-outline" routerLink="/appointments">Voir les RDV par RPPS</a>
+      <a class="btn btn-secondary" [routerLink]="['/practitioners', item.id, 'edit']">Modifier</a>
+      <button class="btn btn-danger" type="button" (click)="deletePractitioner()">Supprimer</button>
+    </div>
+  </div>
+}

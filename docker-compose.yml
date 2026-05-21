@@ -1,0 +1,6 @@
+services:
+  rh-fhir-angular:
+    build: .
+    container_name: rh-fhir-angular
+    ports:
+      - "4200:80"
