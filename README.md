@@ -1,4 +1,4 @@
-# RH FHIR Angular
+# RH FHIR Angular (Pradier Oscar / Gardien Paul / Al bazzou nabil)
 
 Application Angular full front pour le groupe Ressources Humaines du TP FHIR.
 
